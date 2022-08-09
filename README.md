@@ -29,7 +29,7 @@ Run the following commands:
 ```
 sudo apt update
 sudo apt install curl -y
-curl -s https://github.com/RastislavKish/umai/releases/latest/download/umai.sh | bash
+curl -L -s https://github.com/RastislavKish/umai/releases/latest/download/umai.sh | bash
 ```
 
 To download and launch the script from GitHub, or:

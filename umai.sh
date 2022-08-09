@@ -1,4 +1,4 @@
-# Copyright (C) 2021 Rastislav Kish
+# Copyright (C) 2022 Rastislav Kish
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
