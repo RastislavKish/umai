@@ -82,6 +82,12 @@ echo Setting the ACCESSIBILITY_ENABLED flag
 
 sudo sed -i '$ a ACCESSIBILITY_ENABLED=1' /etc/environment 
 
+# Turn on Mate's accessibility setting
+
+echo Turning on Mate's accessibility setting
+
+gsettings set org.mate.interface accessibility true
+
 # Install OCRDesktop
 
 echo Installing OCRDesktop
