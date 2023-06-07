@@ -40,7 +40,7 @@ To download and launch the script from GitHub, or:
 
 If you get the script into your user directory (/home/username) by other means, like downloading via browser, bringing on a USB stick or copying from a network / USB drive.
 
-Enter your user password when asked for, and wait until the script finishes. This can take few minutes.
+Enter your user password if asked for, and wait until the script finishes. This can take few minutes.
 
 You can tell the script has finished when pressing backspace in the terminal window plays a ping.
 
