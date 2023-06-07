@@ -68,6 +68,7 @@ sudo apt install git -y
 cd ~/.uma
 git clone https://gitlab.gnome.org/GNOME/orca.git
 cd orca
+git switch gnome-44
 
 ## Install dependencies, build and upgrade Orca
 
