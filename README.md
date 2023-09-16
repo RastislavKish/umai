@@ -51,9 +51,8 @@ Log out and log in for all changes to take effect.
 Here is the list of operations the script currently applies
 
 1. Enable Orca and the numlock key on the login screen by adding an Arctica greeter's scheme override.
-2. Replace the Snap version of Firefox by a standard deb installation from mozillateam ppa.
-3. Update Orca screenreader to its latest version from the [project's repository](https://gitlab.gnome.org/GNOME/orca).
-4. Set ACCESSIBILITY_ENABLED environment variable to 1 in /etc/environment.
-5. turn on the Mate's accessibility setting (org.mate.interface accessibility).
-6. Install [ocrdesktop](https://github.com/chrys87/ocrdesktop) with all its Python and deb dependencies. The program is installed into /usr/local/bin and can be invoked by its name, making it easy to create a keyboard shortcut for it. The user is encouraged to install Tesseract language pack for their desired language by running sudo apt install tesseract-ocr-<lng>, where <lng> represents Tesseract's language code for a particular language.
+2. Update Orca screenreader to its latest version from the [project's repository](https://gitlab.gnome.org/GNOME/orca).
+3. Set ACCESSIBILITY_ENABLED environment variable to 1 in /etc/environment.
+4. turn on the Mate's accessibility setting (org.mate.interface accessibility).
+5. Install [ocrdesktop](https://github.com/chrys87/ocrdesktop) with all its Python and deb dependencies. The program is installed into /usr/local/bin and can be invoked by its name, making it easy to create a keyboard shortcut for it. The user is encouraged to install Tesseract language pack for their desired language by running sudo apt install tesseract-ocr-<lng>, where <lng> represents Tesseract's language code for a particular language.
 

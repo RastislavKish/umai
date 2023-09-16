@@ -33,20 +33,6 @@ screen-reader=true
 ' | sudo tee /usr/share/glib-2.0/schemas/99_arctica_greeter.gschema.override
 sudo glib-compile-schemas /usr/share/glib-2.0/schemas
 
-# Remove the snap firefox and install an apt-one
-
-echo Replacing Firefox with an apt version
-
-sudo snap remove firefox
-sudo add-apt-repository ppa:mozillateam/ppa -y
-echo \
-'Package: *
-Pin: release o=LP-PPA-mozillateam
-Pin-Priority: 1001
-' | sudo tee /etc/apt/preferences.d/mozilla-firefox
-sudo apt update
-sudo apt install firefox -y
-
 # Install the latest Orca
 
 echo Installing the latest orca
