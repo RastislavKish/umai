@@ -12,7 +12,19 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 
-#!/usr/bin/sh
+#!/usr/bin/bash
+
+. /etc/os-release
+
+if ! [[ "$NAME" == "Ubuntu" ]]; then
+echo 'Error: The UMAI script can only be used on Ubuntu Mate version 22.04 | 23.04'
+exit 1
+fi
+
+if ! [[ "$VERSION" =~ ^(22\.04|23\.04).*$ ]]; then
+echo 'Error: The UMAI script can only be used on Ubuntu Mate version 22.04 | 23.04'
+exit 1
+fi
 
 cd
 mkdir .uma
@@ -39,7 +51,7 @@ echo Installing the latest orca
 
 ## Add site-packages as a symling to dist-packages
 
-cd /usr/local/lib/python3.10
+cd /usr/local/lib/python3.*
 sudo ln -s dist-packages site-packages
 cd
 
@@ -54,11 +66,21 @@ sudo apt install git -y
 cd ~/.uma
 git clone https://gitlab.gnome.org/GNOME/orca.git
 cd orca
-git switch gnome-44
 
 ## Install dependencies, build and upgrade Orca
 
+if [[ "$VERSION" =~ ^22\.04.*$ ]]; then
+
+git switch gnome-44
 sudo apt-get build-dep gnome-orca -y
+
+elif [[ "$VERSION" =~ ^23\.04.*$ ]]; then
+
+git switch gnome-45
+sudo apt-get build-dep orca -y
+
+fi
+
 PYTHON=/usr/bin/python3 ./autogen.sh
 make
 sudo make install
@@ -79,15 +101,36 @@ gsettings set org.mate.interface accessibility true
 
 echo Installing OCRDesktop
 
-sudo apt install python3-pip -y
+sudo apt install python3-pip python3-venv -y
 sudo apt install tesseract-ocr libwnck-3-0 -y
+
+cd ~/.uma
+
+git clone https://github.com/chrys87/ocrdesktop ocrdesktop-repo
+
+mkdir -p ocrdesktop
+python3 -m venv --system-site-packages ocrdesktop/venv
+cp ocrdesktop-repo/ocrdesktop ocrdesktop
+
+cd ocrdesktop
+. venv/bin/activate
+
 pip3 install --upgrade pillow
 pip3 install pdf2image pytesseract scipy webcolors
 
-cd ~/.uma
-git clone https://github.com/chrys87/ocrdesktop
-cd ocrdesktop
-sudo cp ocrdesktop /usr/local/bin
+deactivate
+
+cd ..
+sudo cp -r ocrdesktop /usr/local/lib
+
+echo \
+'#!/usr/bin/bash
+
+. /usr/local/lib/ocrdesktop/venv/bin/activate
+/usr/local/lib/ocrdesktop/venv/bin/python3 /usr/local/lib/ocrdesktop/ocrdesktop "$@"
+' | sudo tee /usr/local/bin/ocrdesktop
+
+sudo chmod +x /usr/local/bin/ocrdesktop
 
 # Clean the downloaded files
 
