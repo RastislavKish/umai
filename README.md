@@ -1,18 +1,14 @@
 # umai
 
-Ubuntu Mate is for long time known for its accessibility and convenience.
+Ubuntu Mate is for long time known for its accessibility and convenience. Still, after the system installation, there is a whole list of settings, tweaks and modifications that need to be done in order to get the system into the best shape for use with a screenreader. It can be tedious even for an experienced user, and a beginner may find a series of configuration files edits, terminal commands and moving around the whole filesystem doing things they are not familiar with yet hard, error prone and even discouraging.
 
-Still, after the system installation, there is a whole list of settings, tweaks and modifications that need to be done in order to get the system into the best shape for use with a screenreader.
-
-It can be tedious even for an experienced user, and a beginner may find a series of configuration files edits, terminal commands and moving around the whole filesystem doing things they are not familiar with yet hard, error prone and even discouraging.
-
-umai is a simple script specialized for Ubuntu Mate 22.04 that automatically performs the most common accessibility-related operations after the system installation. It can save time to seasoned users, and let the beginners focus on more interesting parts of their new OS.
+umai is a simple script specialized for Ubuntu Mate 22.04 and 23.04 that automatically performs the most common accessibility-related operations after the system installation. It can save time to seasoned users, and let the beginners focus on more interesting parts of their new OS.
 
 ## Usage
 
 ### When to use this script and when not
 
-Warning! This script is intended to be used only and exclusively with ubuntu Mate 22.04, after completion of its installation and applying all available updates.
+Warning! This script is intended to be used only and exclusively with ubuntu Mate 22.04 or 23.04, after completion of its installation and applying all available updates.
 
 Usage with a different system, a different version or after doing other changes in the OS can lead to undefined behavior, messing the system at best.
 
@@ -35,7 +31,7 @@ curl -L -s https://github.com/RastislavKish/umai/releases/latest/download/umai.s
 To download and launch the script from GitHub, or:
 
 ```
-./umai.sh
+. umai.sh
 ```
 
 If you get the script into your user directory (/home/username) by other means, like downloading via browser, bringing on a USB stick or copying from a network / USB drive.
