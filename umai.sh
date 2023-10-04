@@ -21,8 +21,8 @@ echo 'Error: The UMAI script can only be used on Ubuntu Mate version 22.04 | 23.
 exit 1
 fi
 
-if ! [[ "$VERSION" =~ ^(22\.04|23\.04).*$ ]]; then
-echo 'Error: The UMAI script can only be used on Ubuntu Mate version 22.04 | 23.04'
+if ! [[ "$VERSION" =~ ^(22\.04|23\.04|23\.10).*$ ]]; then
+echo 'Error: The UMAI script can only be used on Ubuntu Mate version 22.04 | 23.04 | 23.10'
 exit 1
 fi
 
@@ -74,7 +74,7 @@ if [[ "$VERSION" =~ ^22\.04.*$ ]]; then
 git switch gnome-44
 sudo apt-get build-dep gnome-orca -y
 
-elif [[ "$VERSION" =~ ^23\.04.*$ ]]; then
+elif [[ "$VERSION" =~ ^(23\.04|23\.10).*$ ]]; then
 
 git switch gnome-45
 sudo apt-get build-dep orca -y
