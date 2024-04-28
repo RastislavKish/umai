@@ -69,9 +69,9 @@ fi
 sudo sed -i '/deb-src/s/^# //' /etc/apt/sources.list
 sudo apt update
 
-## Install git and clone the repository
+## Install git, meson and clone the repository. Note: Meson is not necessary on UM 22.04
 
-sudo apt install git -y
+sudo apt install git meson -y
 cd ~/.uma
 git clone https://gitlab.gnome.org/GNOME/orca.git
 cd orca
