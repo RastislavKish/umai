@@ -59,8 +59,8 @@ cd
 elif [[ "$VERSION" =~ ^(23\.04|23\.10).*$ ]]; then
 
 # We need to workaround https://bugs.launchpad.net/ubuntu/+source/python3.11/+bug/2052443 fixed in UM 24.04
-sudo mkdir -p /usr/local/local/lib/python3.11/dist-packages
-sudo ln -s /usr/local/local/lib/python3.11/dist-packages /usr/local/lib/python3.11/dist-packages
+sudo mkdir -p /usr/local/local/lib/python3.11
+sudo ln -s /usr/local/lib/python3.11/dist-packages /usr/local/local/lib/python3.11/dist-packages
 
 fi
 
