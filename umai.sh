@@ -125,7 +125,7 @@ gsettings set org.mate.interface accessibility true
 echo Installing OCRDesktop
 
 sudo apt install python3-pip python3-venv -y
-sudo apt install tesseract-ocr libwnck-3-0 -y
+sudo apt install tesseract-ocr libwnck-3-0 python3-pyatspi -y
 
 cd ~/.uma
 
