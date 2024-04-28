@@ -51,9 +51,18 @@ echo Installing the latest orca
 
 ## Add site-packages as a symling to dist-packages
 
+if [[ "$VERSION" =~ ^22\.04.*$ ]]; then
 cd /usr/local/lib/python3.*
 sudo ln -s dist-packages site-packages
 cd
+
+elif [[ "$VERSION" =~ ^(23\.04|23\.10).*$ ]]; then
+
+# We need to workaround https://bugs.launchpad.net/ubuntu/+source/python3.11/+bug/2052443 fixed in UM 24.04
+sudo mkdir -p /usr/local/local/lib/python3.11/dist-packages
+sudo ln -s /usr/local/local/lib/python3.11/dist-packages /usr/local/lib/python3.11/dist-packages
+
+fi
 
 ## Uncomment source repositories
 
@@ -74,16 +83,20 @@ if [[ "$VERSION" =~ ^22\.04.*$ ]]; then
 git switch gnome-44
 sudo apt-get build-dep gnome-orca -y
 
-elif [[ "$VERSION" =~ ^(23\.04|23\.10).*$ ]]; then
-
-git switch gnome-45
-sudo apt-get build-dep orca -y
-
-fi
-
 PYTHON=/usr/bin/python3 ./autogen.sh
 make
 sudo make install
+
+elif [[ "$VERSION" =~ ^(23\.04|23\.10).*$ ]]; then
+
+git switch gnome-46
+sudo apt-get build-dep orca -y
+
+meson setup _build
+meson compile -C _build
+sudo meson install -C _build
+
+fi
 
 # Set the ACCESSIBILITY-ENABLED environment variable
 
