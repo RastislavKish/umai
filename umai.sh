@@ -72,7 +72,7 @@ if [[ "$VERSION" =~ ^(22\.04|23\.04|23\.10).*$ ]]; then
 sudo sed -i '/deb-src/s/^# //' /etc/apt/sources.list
 elif [[ "$VERSION" =~ ^(24\.04).*$ ]]; then
 # UM 24.04 configures source repos in a different way
-sudo sed -i 's/^Types: deb$/Types: deb deb-src/' /etc/apt/sources.list.d/ubuntu*
+sudo sed -i 's/^Types: deb$/Types: deb deb-src/' /etc/apt/sources.list.d/ubuntu.sources*
 
 fi
 
