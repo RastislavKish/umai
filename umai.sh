@@ -21,8 +21,8 @@ echo 'Error: The UMAI script can only be used on Ubuntu Mate version 22.04 | 23.
 exit 1
 fi
 
-if ! [[ "$VERSION" =~ ^(22\.04|23\.04|23\.10).*$ ]]; then
-echo 'Error: The UMAI script can only be used on Ubuntu Mate version 22.04 | 23.04 | 23.10'
+if ! [[ "$VERSION" =~ ^(22\.04|23\.04|23\.10|24\.04).*$ ]]; then
+echo 'Error: The UMAI script can only be used on Ubuntu Mate version 22.04 | 23.04 | 23.10 | 24.04'
 exit 1
 fi
 
@@ -49,9 +49,11 @@ sudo glib-compile-schemas /usr/share/glib-2.0/schemas
 
 echo Installing the latest orca
 
-## Add site-packages as a symling to dist-packages
+# Fix problems with installation target directories
 
 if [[ "$VERSION" =~ ^22\.04.*$ ]]; then
+## Add site-packages as a symling to dist-packages
+
 cd /usr/local/lib/python3.*
 sudo ln -s dist-packages site-packages
 cd
@@ -66,12 +68,19 @@ fi
 
 ## Uncomment source repositories
 
+if [[ "$VERSION" =~ ^(22\.04|23\.04|23\.10).*$ ]]; then
 sudo sed -i '/deb-src/s/^# //' /etc/apt/sources.list
+elif [[ "$VERSION" =~ ^(24\.04).*$ ]]; then
+# UM 24.04 configures source repos in a different way
+sudo sed -i 's/^types: deb$/types: deb deb-src/' /etc/apt/sources.list.d/ubuntu*
+
+fi
+
 sudo apt update
 
-## Install git, meson and clone the repository. Note: Meson is not necessary on UM 22.04
+## Install git and clone the repository
 
-sudo apt install git meson -y
+sudo apt install git -y
 cd ~/.uma
 git clone https://gitlab.gnome.org/GNOME/orca.git
 cd orca
@@ -87,9 +96,10 @@ PYTHON=/usr/bin/python3 ./autogen.sh
 make
 sudo make install
 
-elif [[ "$VERSION" =~ ^(23\.04|23\.10).*$ ]]; then
+elif [[ "$VERSION" =~ ^(23\.04|23\.10|24\.04).*$ ]]; then
 
 git switch gnome-46
+sudo apt install meson -y
 sudo apt-get build-dep orca -y
 
 meson setup _build
