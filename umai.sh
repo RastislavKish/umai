@@ -108,6 +108,28 @@ sudo meson install -C _build
 
 fi
 
+# On UM 24.04, workaround the org.gnome.desktop.a11y.applications screen-reader-enabled gsetting being turned off preventing Orca from autostarting
+
+if [[ "$VERSION" =~ ^(24\.04).*$ ]]; then
+mkdir ~/.config/autostart
+
+# Copy the standard autostart to the user folder and disable the autostart condition
+
+cp /etc/xdg/autostart/orca-autostart.desktop ~/.config/autostart
+sed -i '/AutostartCondition/s/^AutostartCondition/#AutostartCondition/' ~/.config/autostart/orca-autostart.desktop
+
+# Make the disabled variable turn on upon session start, so Super+Alt+S shortcut would work properly
+
+echo \
+'[Desktop Entry]
+Type=Application
+Name=Screen reader enabler
+Exec=gsettings set org.gnome.desktop.a11y.applications screen-reader-enabled true
+NoDisplay=true
+' | tee ~/.config/autostart/screen-reader-enabler.desktop
+
+fi
+
 # Set the ACCESSIBILITY-ENABLED environment variable
 
 echo Setting the ACCESSIBILITY_ENABLED flag
