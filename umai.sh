@@ -98,7 +98,7 @@ sudo make install
 
 elif [[ "$VERSION" =~ ^(23\.04|23\.10|24\.04).*$ ]]; then
 
-git switch gnome-46
+git switch gnome-47
 sudo apt install meson -y
 sudo apt-get build-dep orca -y
 
